@@ -115,9 +115,9 @@ lapply(packages_list, library, character.only=TRUE)
   }
 }
 
-
 db_events = read.csv(paste0(here(), "/database/StatsBomb_FIFA_WorldCup2018_Events.csv"))
 db_events$possession[which(str_detect(db_events$type.name, 'Camera'))] = NA
+
 
 db_events = db_events %>%
   # Compute direct play index using :
