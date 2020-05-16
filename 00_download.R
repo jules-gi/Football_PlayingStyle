@@ -2,7 +2,7 @@
 # Author : Girard Jules (jules.girard@outlook.com)
 
 # Load packages
-packages_list = c('here', 'stringr', 'StatsBombR', 'ggplot2')
+packages_list = c('here', 'stringr', 'StatsBombR')
 lapply(packages_list, library, character.only=TRUE)
 
 
