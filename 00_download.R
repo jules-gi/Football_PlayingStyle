@@ -76,8 +76,8 @@ lapply(packages_list, library, character.only=TRUE)
 
 
 # Download data
-matches = FreeMatches(FreeCompetitions())
-matches = matches[which(matches$competition.competition_name == 'FIFA World Cup'),]
+competitions = FreeCompetitions()
+matches = FreeMatches(competitions[which(competitions$competition_name == 'FIFA World Cup'),])
 
 # Variables to store
 columns_var = c('period', 'time', 'type.name', 'location_X', 'location_Y', 'player.name', 'team.name', 'possession', 'possession_team.name',
@@ -258,5 +258,19 @@ lineup_database = as.data.frame(lineup_database %>%
 )
 
 # Save database
-write.csv(event_database, paste0(here(), '/database/StatsBomb_FIFA_WorldCup2018_Events.csv'), row.names = FALSE)
-write.csv(lineup_database, paste0(here(), '/database/StatsBomb_FIFA_WorldCup2018_Lineup.csv'), row.names = FALSE)
+write.csv(event_database, paste0(here(), '/database/Events.csv'), row.names = FALSE)
+write.csv(lineup_database, paste0(here(), '/database/Lineups.csv'), row.names = FALSE)
+write.csv(lineup_database, paste0(here(), '/database/MatchesMetadata.csv'), row.names = FALSE)
+
+db_events = read.csv(paste0(here(), "/database/Events.csv"))
+for (i in 1:ncol(db_events)) {
+  if (class(db_events[,i]) == "logical") {
+    db_events[,i] = ifelse(is.na(db_events[,i]), FALSE, TRUE)
+  } else if (class(db_events[,i]) == "numeric") {
+    db_events[which(is.na(db_events[,i])),i] = NaN
+  }
+}
+
+write.csv(db_events, paste0(here(), '/database/Events_PyUsage.csv'), row.names = FALSE)
+
+
