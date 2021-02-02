@@ -640,7 +640,7 @@ ggplot(a, aes(x=CA_speed)) +
     scale_y_continuous(name="Pass/carry distance") +
     labs(color = "Event adjusted angle") +
     coord_polar(start=-pi) +
-    ggtitle("Adjusted angle given the original pass/carry angle") +
+    ggtitle("Adjusted angle compared to the original pass/carry angle") +
     theme_linedraw() + 
     theme(
       panel.border = element_rect(color=NA)
